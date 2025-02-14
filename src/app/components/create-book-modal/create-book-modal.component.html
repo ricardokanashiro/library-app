@@ -1,0 +1,43 @@
+<div class="container">
+
+  <h1>Cadastrar Livro</h1>
+
+  <form [formGroup]="formulario">
+
+    <ion-button (click)="pickImage()">Selecionar imagem</ion-button>
+
+    <div>
+      <ion-input 
+        type="text" 
+        label="Titulo do Livro" 
+        labelPlacement="floating" 
+        formControlName="titulo"
+        fill="outline"
+      ></ion-input>
+    </div>
+
+    <div>
+      <ion-input 
+        type="text" 
+        label="Nome do Autor" 
+        labelPlacement="floating" 
+        formControlName="autor"
+        fill="outline"
+      ></ion-input>
+    </div>
+
+    <div>
+      <ion-textarea 
+        type="text" 
+        label="Sinopse do Livro (opcional)" 
+        labelPlacement="floating" 
+        formControlName="sinopse"
+        fill="outline" 
+        placeholder="Digite a sinopse do livro"
+      ></ion-textarea>
+    </div>
+
+  </form>
+
+  <ion-button (click)="onCancel()">Close</ion-button>
+</div>
