@@ -1,0 +1,77 @@
+.container {
+    padding: 1.5rem 2.5rem;
+    overflow: auto;
+    padding-top: calc(env(safe-area-inset-top) + 4rem) !important;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 3rem 0;
+}
+
+.image-picker-wrapper {
+    width: 100%;
+    height: 30rem;
+    margin-bottom: 3rem;
+
+    ion-img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.image-picker-placeholder {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--ion-color-primary);
+    border-radius: .6rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-picker-btn {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    ion-icon {
+        font-size: 2.5rem;
+    }
+
+    ion-text {
+        font-size: 1.6rem;
+    }
+}
+
+ion-input {
+    font-size: 1.4rem;
+}
+
+ion-textarea {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+}
+
+.select-author-btn {
+    border: 1px solid rgb(186, 186, 186);
+    background-color: transparent;
+    padding: 1.5rem;
+    border-radius: .4rem;
+    font-size: 1.4rem;
+    margin: 2rem 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.create-book-btn {
+    margin-top: 5rem;
+    font-size: 1.4rem;
+}

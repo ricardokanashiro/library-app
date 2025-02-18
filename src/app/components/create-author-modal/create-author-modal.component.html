@@ -1,0 +1,19 @@
+<div class="container">
+
+  <ion-button (click)="onCancel()">Voltar</ion-button>
+
+  <h1>Cadastrar Autor</h1>
+
+  <div>
+    <ion-input
+        type="text"
+        label="Nome"
+        labelPlacement="floating"
+        [(ngModel)]="authorNameText"
+        fill="outline"
+      ></ion-input>
+  </div>
+
+  <ion-button expand="full" class="create-author-btn" (click)="onCreateAuthor()">Cadastrar</ion-button>
+
+</div>

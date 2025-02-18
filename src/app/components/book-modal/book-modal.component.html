@@ -1,3 +1,55 @@
 <div class="container">
-  <ion-button (click)="onCancel()">Back</ion-button>
+
+  <header>
+
+    <ion-button (click)="onCancel()">Back</ion-button>
+
+    <button class="delete-btn" (click)="onDelete()">
+      <ion-icon name="trash" color="primary"></ion-icon>
+      <ion-text color="primary">Deletar</ion-text>
+    </button>
+
+  </header>
+
+  <ion-img [src]="book?.image_path"></ion-img>
+
+  <h1>{{ book?.title }}</h1>
+
+  <div class="sinopse-wrapper">
+    <ion-text>{{ book?.sinopse }}</ion-text>
+  </div>
+
+  <p>
+    <span>Autor: </span>
+    <ion-text>{{ book?.author_name }}</ion-text>
+  </p>
+
+  <p>
+    <span>Último aluguel: </span>
+    <ion-text *ngIf="!book?.rented_date">Nenhum</ion-text>
+    <ion-text *ngIf="book?.rented_date">{{ book?.rented_date }}</ion-text>
+  </p>
+
+  <p>
+    <span>Último a dar baixa: </span>
+    <ion-text *ngIf="!book?.rented_by">Nenhum</ion-text>
+    <ion-text *ngIf="book?.rented_by">{{ book?.rented_by }}</ion-text>
+  </p>
+
+  <ion-button 
+    expand="full" 
+    class="rent-btn" 
+    *ngIf="!book?.rented"
+    (click)="onRent()">
+    Alugar
+  </ion-button>
+
+  <ion-button 
+    expand="full" 
+    class="rent-btn" 
+    *ngIf="book?.rented"
+    (click)="onRent()">
+    Devolver
+  </ion-button>
+
 </div>

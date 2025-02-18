@@ -49,3 +49,12 @@
 html {
     font-size: 62.5%;
 }
+
+body {
+    --ion-background-color: #ffffff;
+    --ion-text-color: #000000;
+}
+
+.container {
+    padding-top: calc(env(safe-area-inset-top) + 2.5rem) !important;
+}

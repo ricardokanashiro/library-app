@@ -23,8 +23,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  onLogIn() {
-    this.authService.login(this.formulario.value)
+  async onLogIn() {
+    await this.authService.login(this.formulario.value)
 
     if(this.authService.userIsAuthenticated) {
       this.router.navigateByUrl('/tabs/books')

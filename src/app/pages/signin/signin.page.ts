@@ -13,7 +13,11 @@ export class SigninPage implements OnInit {
 
   formulario: FormGroup | any
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(
+    private authService: AuthService, 
+    private fb: FormBuilder, 
+    private router: Router 
+  ) {
     this.formulario = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -24,9 +28,9 @@ export class SigninPage implements OnInit {
   ngOnInit() {
   }
 
-  onSignIn() {
-    this.authService.signIn(this.formulario.value)
+  async onSignIn() {
+    await this.authService.signIn(this.formulario.value)
     this.router.navigateByUrl('/tabs/books')
-  } 
+  }
 
 }

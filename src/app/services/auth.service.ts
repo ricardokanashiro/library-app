@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { userData, UsersService } from './users.service';
 import { AlertController } from '@ionic/angular';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,23 @@ export class AuthService {
 
   private _isLogged: boolean = false
 
-  constructor(private usersService: UsersService, private alertCtrl: AlertController) {}
+  constructor(
+    private usersService: UsersService, 
+    private alertCtrl: AlertController,
+    private storageService: StorageService
+  ) {}
 
   private async setLoginStatus(isLogged: boolean) {
     this._isLogged = isLogged
   }
 
-  public signIn(data: userData) {
+  public async signIn(data: userData) {
 
     try {
-      this.usersService.createUser(data)
+      const addedUser = await this.usersService.createUser(data)
       this.setLoginStatus(true)
+
+      await this.storageService.set('loginData', JSON.stringify(addedUser))
     } 
     catch (err: any) {
       
@@ -36,16 +43,17 @@ export class AuthService {
     }
   }
 
-  public login(data: { email: string, password: string }) {
+  public async login(data: { email: string, password: string }) {
+
+    const foundUser = await this.usersService.getUserByEmail(data.email)
 
     if(
-      !this.usersService.getUserByEmail(data.email)
-      || this.usersService.getUserByEmail(data.email)?.password !== data.password
+      !foundUser || foundUser?.password !== data.password
     ) {
       
       this.alertCtrl.create({
-        header: "Erro ao cadastrar conta",
-        message: "Esse usuário não existe!",
+        header: "Erro ao logar essa conta!",
+        message: "Esse usuário não existe",
         buttons: [
           { text: 'Ok' }
         ]
@@ -58,6 +66,7 @@ export class AuthService {
     }
     
     this.setLoginStatus(true)
+    await this.storageService.set('loginData', JSON.stringify(foundUser))
   }
 
   public logout() {

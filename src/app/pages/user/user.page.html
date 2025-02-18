@@ -1,6 +1,13 @@
 <div class="container" (click)="onLogout()">
-  <ion-button>
+
+  <div class="user-info">
+    <h1>{{ userData?.name }}</h1>
+    <ion-text>{{ userData?.email }}</ion-text>
+  </div>
+
+  <ion-button class="logout-btn">
     <ion-icon name="exit"></ion-icon>
     <ion-text>Logout</ion-text>
   </ion-button>
+
 </div>

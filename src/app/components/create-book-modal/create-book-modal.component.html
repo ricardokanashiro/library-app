@@ -1,27 +1,35 @@
 <div class="container">
 
+  <ion-button (click)="onCancel()">
+    <ion-icon name="arrow-back"></ion-icon>
+    <ion-text>Back</ion-text>
+  </ion-button>
+
   <h1>Cadastrar Livro</h1>
 
   <form [formGroup]="formulario">
 
-    <ion-button (click)="pickImage()">Selecionar imagem</ion-button>
+    <div class="image-picker-wrapper" (click)="pickImage()">
+
+      <ion-img *ngIf="selectedImage" [src]="selectedImage"></ion-img>
+
+      <div class="image-picker-placeholder" *ngIf="!selectedImage">
+
+        <div class="image-picker-btn">
+          <ion-icon name="image" color="primary"></ion-icon>
+          <ion-text color="primary">Select Image</ion-text>
+        </div>
+
+      </div>
+
+    </div>
 
     <div>
       <ion-input 
         type="text" 
         label="Titulo do Livro" 
         labelPlacement="floating" 
-        formControlName="titulo"
-        fill="outline"
-      ></ion-input>
-    </div>
-
-    <div>
-      <ion-input 
-        type="text" 
-        label="Nome do Autor" 
-        labelPlacement="floating" 
-        formControlName="autor"
+        formControlName="title"
         fill="outline"
       ></ion-input>
     </div>
@@ -37,7 +45,13 @@
       ></ion-textarea>
     </div>
 
+    <button (click)="onSelectAuthor()" class="select-author-btn">
+      {{ selectedAuthor?.name || "Select author" }}
+      <ion-icon name="arrow-down"></ion-icon>
+    </button>
+
   </form>
 
-  <ion-button (click)="onCancel()">Close</ion-button>
+  <ion-button (click)="onCreateBook()" expand="full" class="create-book-btn">Cadastrar</ion-button>
+  
 </div>

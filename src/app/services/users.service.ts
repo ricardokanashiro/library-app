@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 
 import { v4 as uuidV4 } from 'uuid';
+import { StorageService } from './storage.service';
 
 export interface userData {
   name: string
@@ -14,28 +15,47 @@ export interface userData {
 })
 export class UsersService {
 
-  public users: User[] = []
+  private key = 'users'
 
-  constructor() {}
+  constructor(private storageService: StorageService) {}
 
-  public createUser(data: userData) {
+  public async createUser(data: userData) {
 
-    const userAlreadyExists = this.users.some(user => user.email === data.email)
+    const userData = await this.storageService.get(this.key)
+    let users: User[] = []
+    
+    if(userData) {
+      users = JSON.parse(userData) as User[]
+    }
+
+    const userAlreadyExists = users.some(user => user.email === data.email)
 
     if(userAlreadyExists) {
       throw new Error("Um usuário com esse email já existe!")
     }
 
-    this.users.push({ ...data, id: uuidV4() })
+    const newUser = { ...data, id: uuidV4() }
+
+    await this.storageService.set(this.key, JSON.stringify([...users, newUser]))
+
+    return newUser
   }
 
-  public getUserById(id: string) {
-    const foundUser = this.users.find(user => user.id === id)
+  public async getUserById(id: string) {
+
+    const usersData = await this.storageService.get(this.key)
+    const usersParsed = JSON.parse(usersData) as User[]
+
+    const foundUser = usersParsed.find(user => user.id === id)
     return foundUser
   }
 
-  public getUserByEmail(email: string) {
-    const foundUser = this.users.find(user => user.email === email)
+  public async getUserByEmail(email: string) {
+    
+    const usersData = await this.storageService.get(this.key)
+    const usersParsed = JSON.parse(usersData) as User[]
+
+    const foundUser = usersParsed.find(user => user.email === email)
     return foundUser
   }
 }

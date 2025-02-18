@@ -1,17 +1,24 @@
 <div class="container" (click)="onClickCard()">
 
-  <ion-img [src]="imageUrl"></ion-img>
+  <ion-img [src]="book?.image_path"></ion-img>
 
   <div class="book-content">
 
     <div class="book-info">
-      <ion-title>Titulo do Livro</ion-title>
-      <ion-text>Nome do autor</ion-text>
+      <h3>{{ book?.title }}</h3>
+      <ion-text>{{ book?.author_name }}</ion-text>
     </div>
+
+    <p>{{ book?.sinopse }}</p>
   
-    <div class="book-status">
+    <div class="book-status-rented book-status" *ngIf="!book?.rented">
       <div class="active-circle"></div>
       <p>Disponível</p>
+    </div>
+
+    <div class="book-status-available book-status" *ngIf="book?.rented">
+      <div class="active-circle"></div>
+      <p>Alugado</p>
     </div>
 
   </div>

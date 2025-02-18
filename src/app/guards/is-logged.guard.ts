@@ -7,10 +7,9 @@ export const isLoggedGuard: CanMatchFn = (route, segments) => {
   const authService = inject(AuthService)
   const router = inject(Router)
 
-  // if(!authService.userIsAuthenticated) {
-  //   router.navigateByUrl('/login')
-  // }
+  if(!authService.userIsAuthenticated) {
+    router.navigateByUrl('/login')
+  }
 
-  // return authService.userIsAuthenticated
-  return true
+  return authService.userIsAuthenticated
 }

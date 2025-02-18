@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BookModalComponent } from '../book-modal/book-modal.component';
+import { Book } from 'src/app/interfaces/book';
 
 @Component({
   selector: 'app-book-card',
@@ -10,14 +11,14 @@ import { BookModalComponent } from '../book-modal/book-modal.component';
 })
 export class BookCardComponent  implements OnInit {
 
-  imageUrl: string = "https://imgs.search.brave.com/CjH6w-590g34nL-AD73sQ9O95d43b_DBOAejhxwWot8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYXJr/ZXRwbGFjZS5jYW52/YS5jb20vRUFFd3Az/ckxiMDgvMS8wLzEw/MDN3L2NhbnZhLWNh/cGEtZGUtbGl2cm8t/ZGFkb3MtcGVzc29h/aXMtY2luemEtYjd2/dFpiYlJSamsuanBn"
+  @Input() book: Book | undefined
 
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {}
 
   onClickCard() {
-    this.modalCtrl.create({ component: BookModalComponent, componentProps: {} })
+    this.modalCtrl.create({ component: BookModalComponent, componentProps: { bookId: this.book?.id } })
       .then(modalEl => {
         modalEl.present()
         return modalEl.onDidDismiss()

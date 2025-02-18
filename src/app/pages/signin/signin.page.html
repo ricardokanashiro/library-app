@@ -1,53 +1,35 @@
 <ion-content [fullscreen]="true">
 
-  <h1>Cadastre-se agora!</h1>
+  <div class="container">
 
-  <form [formGroup]="formulario">
+    <h1>Cadastre-se agora!</h1>
 
-    <div>
-      <ion-input
-        type="text"
-        label="Name"
-        labelPlacement="floating"
-        formControlName="name"
-        fill="outline"
-      ></ion-input>
-    </div>
+    <form [formGroup]="formulario">
 
-    <div>
-      <ion-input
-        type="email"
-        label="Email"
-        labelPlacement="floating"
-        formControlName="email"
-        fill="outline"
-      ></ion-input>
-    </div>
+      <div>
+        <ion-input type="text" label="Name" labelPlacement="floating" formControlName="name" fill="outline"></ion-input>
+      </div>
 
-    <div>
-      <ion-input
-        type="password"
-        label="Password"
-        labelPlacement="floating"
-        formControlName="password"
-        fill="outline"
-      ></ion-input>
-    </div>
+      <div>
+        <ion-input type="email" label="Email" labelPlacement="floating" formControlName="email"
+          fill="outline"></ion-input>
+      </div>
 
-    <ion-button 
-      (click)="onSignIn()" 
-      expand="full" 
-      type="submit" 
-      [disabled]="formulario.invalid"
-    >
-      Entrar
-    </ion-button>
+      <div>
+        <ion-input type="password" label="Password" labelPlacement="floating" formControlName="password"
+          fill="outline"></ion-input>
+      </div>
 
-    <ion-text class="sign-in-link">
-      Já possui conta? 
-      <a class="sign-in-text" [routerLink]="['/', 'login']">Entre</a> agora mesmo
-    </ion-text>
-  </form>
+      <ion-button (click)="onSignIn()" expand="full" type="submit" [disabled]="formulario.invalid">
+        Entrar
+      </ion-button>
 
+      <ion-text class="sign-in-link">
+        Já possui conta?
+        <a class="sign-in-text" [routerLink]="['/', 'login']">Entre</a> agora mesmo
+      </ion-text>
+    </form>
+
+  </div>
 
 </ion-content>

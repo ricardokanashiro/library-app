@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { CreateBookModalComponent } from 'src/app/components/create-book-modal/create-book-modal.component';
-import { UsersService } from 'src/app/services/users.service';
+import { Book } from 'src/app/interfaces/book';
+import { BooksService } from 'src/app/services/books.service';
+import { StorageService } from '../../services/storage.service';
+import { Author } from 'src/app/interfaces/author';
+import { mockedImgs } from 'src/utils/mockedImgs';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +16,89 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class HomePage implements OnInit {
 
-  usuarioNome: string = "Ricardo Kanashiro"
   searchOption: string = "livro"
+  userData: any
 
-  constructor(private modalCtrl: ModalController, private usersService: UsersService) { }
+  searchText = new BehaviorSubject<string>("")
 
-  ngOnInit() {
-    
+  books$: Observable<Book[]> | undefined
+  books: Book[] | undefined
+  booksFiltered$: Observable<Book[]> | undefined
+
+  private mockedAuthors: Author[] = [
+    { id: 'a1', name: 'L. Frank Baum' },
+    { id: 'a2', name: 'Herman Melville' },
+  ]
+
+  private mockedBooks: Book[] = [
+    {
+      id: 'b1',
+      title: 'O mágico de Oz',
+      author_id: 'a1',
+      author_name: 'L. Frank Baum',
+      rented: false,
+      rented_date: null,
+      image_path: 'data:image/jpeg;base64,' + mockedImgs.magicoOz,
+      sinopse: 'História do mágico de Oz',
+      rented_by: null
+    },
+    {
+      id: 'b2',
+      title: 'Mob Dick',
+      author_id: 'a2',
+      author_name: 'Herman Melville',
+      rented: false,
+      rented_date: null,
+      image_path: 'data:image/jpeg;base64,' + mockedImgs.mobDick,
+      sinopse: 'História da baleia Mob Dick',
+      rented_by: null
+    }
+  ]
+
+  constructor(
+    private modalCtrl: ModalController,
+    private booksService: BooksService,
+    private storageService: StorageService
+  ) { }
+
+  async ngOnInit() {
+
+    const bookData = await this.storageService.get('books')
+    const books = JSON.parse(bookData)
+
+    if(!bookData || !books || books.length === 0) {
+      await this.storageService.set('authors', JSON.stringify(this.mockedAuthors))
+      await this.storageService.set('books', JSON.stringify(this.mockedBooks))
+    }
+
+    this.books$ = this.booksService.getBooks()
+
+    this.books$.subscribe(books => {
+      this.books = books
+    })
+
+    this.booksFiltered$ = combineLatest([
+      this.books$,
+      this.searchText.asObservable(),
+    ]).pipe(
+      map(([books, searchText]) => {
+        if (searchText) {
+          return books.filter(book =>
+            this.searchOption === 'livro'
+              ? book.title.toLowerCase().includes(searchText.toLowerCase())
+              : book.author_name.toLowerCase().includes(searchText.toLowerCase())
+          );
+        } else {
+          return books
+        }
+      })
+    )
+
+    this.getUser()
+  }
+
+  async ionViewWillEnter() {
+    await this.getUser()
   }
 
   public onSelectSearchOption(event: any) {
@@ -25,14 +106,26 @@ export class HomePage implements OnInit {
   }
 
   public onCreateBook() {
+
     this.modalCtrl.create({ component: CreateBookModalComponent, componentProps: {} })
-      .then(modalEl => { 
+      .then(modalEl => {
         modalEl.present()
         return modalEl.onDidDismiss()
       })
       .then(resultData => {
         console.log(resultData)
       })
+  }
+
+  filterList(event: Event) {
+    const input = event.target as HTMLInputElement
+    this.searchText.next(input.value)
+  }
+
+  private async getUser() {
+    const data = await this.storageService.get('loginData')
+    const parsedData = data ? JSON.parse(data) : null
+    this.userData = parsedData
   }
 
 }

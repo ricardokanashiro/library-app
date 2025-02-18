@@ -1,11 +1,11 @@
 <ion-content [fullscreen]="true">
   <div class="container">
 
-    <h1>Bem vindo {{ usuarioNome.split(' ')[0] }}</h1>
+    <h1>Bem vindo {{ userData?.name.split(' ')[0] }}</h1>
 
     <div class="search-area">
 
-      <ion-input type="text" placeholder="Digite o nome"></ion-input>
+      <ion-input type="text" placeholder="Digite o nome" (input)="filterList($event)"></ion-input>
 
       <ion-list class="option-list">
         <ion-item class="option-list-item">
@@ -28,7 +28,7 @@
       <button (click)="onCreateBook()">Cadastrar Livro</button>
     </div>
 
-    <app-book-list></app-book-list>
+    <app-book-list [books]="booksFiltered$ | async"></app-book-list>
 
   </div>
 </ion-content>

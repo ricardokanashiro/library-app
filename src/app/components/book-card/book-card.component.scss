@@ -4,5 +4,63 @@
 }
 
 ion-img {
-    width: 5rem;
+    min-width: 8rem;
+    max-width: 8rem;
+    min-height: 11rem;
+    max-height: 11rem;
+    object-fit: cover;
+}
+
+.book-info {
+
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 0;
+    }
+}
+
+.book-status {
+    background-color: rgb(245, 245, 245);
+    border-radius: .6rem;
+    padding: .6rem 1rem;
+    width: min-content;
+    margin-top: 1.4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .active-circle {
+        width: .8rem;
+        height: .8rem;
+        border-radius: 50%;
+    }
+
+    p {
+        font-size: .9rem;
+    }
+}
+
+.book-status-available {
+
+    .active-circle {
+        background-color: #FF6D6A;
+    }
+
+    p {
+        color: #FF6D6A;
+    }
+}
+
+.book-status-rented {
+
+    .active-circle {
+        background-color: #77dd77;
+    }
+
+    p {
+        color: #77dd77;
+    }
 }
