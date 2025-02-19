@@ -27,10 +27,11 @@ export class HomePage implements OnInit {
 
   private mockedAuthors: Author[] = [
     { id: 'a1', name: 'L. Frank Baum' },
-    { id: 'a2', name: 'Herman Melville' },
+    { id: 'a2', name: 'Herman Melville' }
   ]
 
   private mockedBooks: Book[] = [
+    
     {
       id: 'b1',
       title: 'O mágico de Oz',
@@ -42,6 +43,7 @@ export class HomePage implements OnInit {
       sinopse: 'História do mágico de Oz',
       rented_by: null
     },
+
     {
       id: 'b2',
       title: 'Mob Dick',
@@ -53,13 +55,14 @@ export class HomePage implements OnInit {
       sinopse: 'História da baleia Mob Dick',
       rented_by: null
     }
+
   ]
 
   constructor(
     private modalCtrl: ModalController,
     private booksService: BooksService,
     private storageService: StorageService
-  ) { }
+  ) {}
 
   async ngOnInit() {
 
@@ -87,7 +90,7 @@ export class HomePage implements OnInit {
             this.searchOption === 'livro'
               ? book.title.toLowerCase().includes(searchText.toLowerCase())
               : book.author_name.toLowerCase().includes(searchText.toLowerCase())
-          );
+          )
         } else {
           return books
         }

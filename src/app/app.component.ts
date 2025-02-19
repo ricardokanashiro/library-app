@@ -18,6 +18,6 @@ export class AppComponent {
   }
 
   setupKeyboardBehavior() {
-    Keyboard.setResizeMode({ mode: 'body' } as KeyboardResizeOptions);
+    Keyboard.setResizeMode({ mode: 'body' } as KeyboardResizeOptions)
   }
 }

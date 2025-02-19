@@ -16,12 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
     canMatch: [alreadyLoggedGuard]
   },
   {
     path: 'signin',
-    loadChildren: () => import('./pages/signin/signin.module').then( m => m.SigninPageModule),
+    loadChildren: () => import('./pages/signin/signin.module').then(m => m.SigninPageModule),
     canMatch: [alreadyLoggedGuard]
   },
 ]
@@ -32,4 +32,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
