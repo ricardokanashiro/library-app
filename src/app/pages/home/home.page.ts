@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { CreateBookModalComponent } from 'src/app/components/create-book-modal/create-book-modal.component';
-import { Book } from 'src/app/interfaces/book';
+
 import { BooksService } from 'src/app/services/books.service';
 import { StorageService } from '../../services/storage.service';
+
+import { CreateBookModalComponent } from 'src/app/components/create-book-modal/create-book-modal.component';
+
+import { Book } from 'src/app/interfaces/book';
 import { Author } from 'src/app/interfaces/author';
+
 import { mockedImgs } from 'src/utils/mockedImgs';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +29,13 @@ export class HomePage implements OnInit {
   books$: Observable<Book[]> | undefined
   books: Book[] | undefined
   booksFiltered$: Observable<Book[]> | undefined
+
+  private mockedUser: User = {
+    id: 'u1',
+    name: 'Ricardo Kanashiro',
+    email: 'ricardo@email.com',
+    password: '123'
+  }
 
   private mockedAuthors: Author[] = [
     { id: 'a1', name: 'L. Frank Baum' },
@@ -67,9 +79,14 @@ export class HomePage implements OnInit {
   async ngOnInit() {
 
     const bookData = await this.storageService.get('books')
-    const books = JSON.parse(bookData)
+    let previousBooks: Book[] = []
 
-    if(!bookData || !books || books.length === 0) {
+    if (bookData) {
+      previousBooks = JSON.parse(bookData)
+    }
+
+    if (!bookData || !previousBooks || previousBooks.length === 0) {
+      await this.storageService.set('loginData', JSON.stringify(this.mockedUser))
       await this.storageService.set('authors', JSON.stringify(this.mockedAuthors))
       await this.storageService.set('books', JSON.stringify(this.mockedBooks))
     }

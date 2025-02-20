@@ -58,3 +58,10 @@ body {
 .container {
     padding-top: calc(env(safe-area-inset-top) + 2.5rem) !important;
 }
+
+ion-modal.rate-modal {
+    --height: auto;
+    display: flex;
+    align-items: flex-end;
+    background: rgba(0, 0, 0, 0.5);
+}

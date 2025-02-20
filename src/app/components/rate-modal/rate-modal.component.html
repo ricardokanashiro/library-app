@@ -1,0 +1,16 @@
+<div class="container">
+
+  <ion-button color="primary" (click)="onCancel()">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+    <ion-text>Voltar</ion-text>
+  </ion-button>
+
+  <h2>Avaliação do Cliente</h2>
+
+  <div class="star-rating-area">
+    <ion-input type="number" [(ngModel)]="rating"></ion-input>
+  </div>
+
+  <ion-button (click)="onRate()" [disabled]="!this.rating" expand="full">Avaliar</ion-button>
+
+</div>

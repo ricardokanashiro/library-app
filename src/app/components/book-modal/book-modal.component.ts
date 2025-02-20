@@ -2,7 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { map, Observable } from 'rxjs';
 import { Book } from 'src/app/interfaces/book';
+import { User } from 'src/app/interfaces/user';
 import { BooksService } from 'src/app/services/books.service';
+import { RentService } from 'src/app/services/rent.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { RateModalComponent } from '../rate-modal/rate-modal.component';
 
 @Component({
   selector: 'app-book-modal',
@@ -13,15 +17,20 @@ import { BooksService } from 'src/app/services/books.service';
 export class BookModalComponent  implements OnInit {
 
   @Input() bookId: string | undefined
+
   book$: Observable<any> | undefined
   book: Book | undefined
 
+  private user: User | undefined
+
   constructor(
     private modalCtrl: ModalController, 
-    private bookService: BooksService
+    private bookService: BooksService,
+    private rentService: RentService,
+    private storageService: StorageService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.book$ = this.bookService.getBooks().pipe(
       map(books => books.find(book => book.id === this.bookId))
@@ -29,6 +38,16 @@ export class BookModalComponent  implements OnInit {
 
     this.book$.subscribe(book => {
       this.book = book
+    })
+
+    const userData = await this.storageService.get('loginData')
+
+    if(userData) {
+      this.user = JSON.parse(userData) as User
+    }
+
+    (await this.rentService.getRents()).subscribe(data => {
+      console.log(data)
     })
 
   }
@@ -51,12 +70,34 @@ export class BookModalComponent  implements OnInit {
 
   onRent() {
 
-    if(this.book) {
-      this.bookService.toggleRentBook(this.book.id)
+    if(this.book && this.user) {
 
-      setTimeout(() => {
-        console.log(this.book)
-      }, 1000)
+      if(this.book.rented) {
+
+        this.modalCtrl.create({ 
+          component: RateModalComponent, 
+          componentProps: { book: this.book, user: this.user },
+          cssClass: 'rate-modal',
+          backdropDismiss: true
+        })
+          .then(modalEl => {
+            modalEl.present()
+            return modalEl.onDidDismiss()
+          })
+          .then(resultData => {
+            console.log(resultData)
+          })
+
+        return
+      }
+
+      this.rentService.createRent({ 
+        modified_by: this.user?.id,
+        rate: null,
+        operation: this.book.rented ? 'return' : 'rent'
+      })
+  
+      this.bookService.toggleRentBook(this.book.id)
 
       return
     }

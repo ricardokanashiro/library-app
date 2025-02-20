@@ -9,8 +9,8 @@ import { Rent } from '../interfaces/rent';
 
 export interface RentData {
   modified_by: string
-  rate: number
   operation: 'rent' | 'return'
+  rate: number | null
 }
 
 @Injectable({
@@ -36,7 +36,7 @@ export class RentService {
 
     const updatedRents = [ ...rents, { ...data, id: uuidV4(), date: moment().format('L') } ]
 
-    await this.storeService.set(this._key, JSON.stringify(rents))
+    await this.storeService.set(this._key, JSON.stringify(updatedRents))
     this._rentsSubject.next(updatedRents)
   }
 

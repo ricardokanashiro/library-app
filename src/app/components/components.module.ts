@@ -8,6 +8,7 @@ import { CreateBookModalComponent } from "./create-book-modal/create-book-modal.
 import { BookModalComponent } from "./book-modal/book-modal.component";
 import { AuthorModalComponent } from "./author-modal/author-modal.component";
 import { CreateAuthorModalComponent } from "./create-author-modal/create-author-modal.component";
+import { RateModalComponent } from "./rate-modal/rate-modal.component";
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { CreateAuthorModalComponent } from "./create-author-modal/create-author-
         CreateBookModalComponent,
         BookModalComponent,
         AuthorModalComponent,
-        CreateAuthorModalComponent
+        CreateAuthorModalComponent,
+        RateModalComponent
     ],
     imports: [
         CommonModule, 
@@ -30,7 +32,8 @@ import { CreateAuthorModalComponent } from "./create-author-modal/create-author-
         CreateBookModalComponent,
         BookModalComponent,
         AuthorModalComponent,
-        CreateAuthorModalComponent
+        CreateAuthorModalComponent,
+        RateModalComponent
     ]
 })
 export class ComponentsModule {}
