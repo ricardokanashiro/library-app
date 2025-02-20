@@ -18,8 +18,12 @@ export class RentsListComponent  implements OnInit {
   constructor(private rentService: RentService) { }
 
   async ngOnInit() {
+
     this.rents$ = (await this.rentService.getRents()).pipe(
-      map(rent => rent.filter((rent: Rent) => rent.book_id === this.book?.id))
+      map(rents => rents
+        .filter((rent: Rent) => rent.book_id === this.book?.id)
+        .slice(0, 4)
+      )
     )
   }
 

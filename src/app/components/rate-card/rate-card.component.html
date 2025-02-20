@@ -1,0 +1,5 @@
+<div [class]="choseRating === ratingValue ? 'container card-selected' : 'container'" (click)="onEmitChoseValue()">
+  <!-- <ion-icon name="star-outline"></ion-icon> -->
+  <ion-text>⭐</ion-text>
+  <ion-text>{{ ratingValue }}</ion-text>
+</div>

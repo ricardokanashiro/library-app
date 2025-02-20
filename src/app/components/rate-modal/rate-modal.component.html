@@ -8,9 +8,14 @@
   <h2>Avaliação do Cliente</h2>
 
   <div class="star-rating-area">
-    <ion-input type="number" [(ngModel)]="rating"></ion-input>
+    <app-rate-card 
+      *ngFor="let ratingNum of ratingNums" 
+      [ratingValue]="ratingNum"
+      (chooseValue)="onReceiveRatingValue($event)"
+      [choseRating]="choseRating">
+    </app-rate-card>
   </div>
 
-  <ion-button (click)="onRate()" [disabled]="!this.rating" expand="full">Avaliar</ion-button>
+  <ion-button (click)="onRate()" [disabled]="!this.choseRating" expand="full" class="rate-btn">Avaliar</ion-button>
 
 </div>

@@ -35,7 +35,7 @@ export class RentService {
       rents = JSON.parse(rentsData)
     }
 
-    const updatedRents = [ ...rents, { ...data, id: uuidV4(), date: moment().format('L') } ]
+    const updatedRents = [ { ...data, id: uuidV4(), date: moment().format('L') }, ...rents ]
 
     await this.storeService.set(this._key, JSON.stringify(updatedRents))
     this._rentsSubject.next(updatedRents)
