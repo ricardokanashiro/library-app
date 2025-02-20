@@ -1,0 +1,10 @@
+<ion-list>
+
+  <header>
+    <h3>Histórico de aluguéis</h3>
+    <button>Ver todos</button>
+  </header>
+
+  <app-rent-card *ngFor="let rent of rents$ | async" [rent]="rent"></app-rent-card>
+
+</ion-list>

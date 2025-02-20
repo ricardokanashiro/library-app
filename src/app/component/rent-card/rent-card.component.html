@@ -1,0 +1,20 @@
+<ion-item>
+  <div class="container">
+
+    <header>
+      <h4 *ngIf="rent?.operation === 'rent'">Aluguel</h4>
+      <h4 *ngIf="rent?.operation === 'return'">Devolução</h4>
+      <ion-text>{{ rent?.date }}</ion-text>
+    </header>
+
+    <ion-text>
+      <span>Usuário: </span> Ricardo Kanashiro
+    </ion-text>
+
+    <div class="rating" *ngIf="rent?.rate">
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-text>{{ rent?.rate }} / 5</ion-text>
+    </div>
+
+  </div>
+</ion-item>

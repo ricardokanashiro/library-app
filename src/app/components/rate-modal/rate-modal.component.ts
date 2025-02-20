@@ -39,7 +39,8 @@ export class RateModalComponent  implements OnInit {
     this.rentService.createRent({ 
       modified_by: this.user?.id,
       rate: this.rating,
-      operation: this.book.rented ? 'return' : 'rent'
+      operation: this.book.rented ? 'return' : 'rent',
+      book_id: this.book.id
     })
 
     this.booksService.toggleRentBook(this.book.id)

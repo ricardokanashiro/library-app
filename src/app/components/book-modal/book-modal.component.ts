@@ -7,6 +7,7 @@ import { BooksService } from 'src/app/services/books.service';
 import { RentService } from 'src/app/services/rent.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { RateModalComponent } from '../rate-modal/rate-modal.component';
+import { Rent } from 'src/app/interfaces/rent';
 
 @Component({
   selector: 'app-book-modal',
@@ -94,7 +95,8 @@ export class BookModalComponent  implements OnInit {
       this.rentService.createRent({ 
         modified_by: this.user?.id,
         rate: null,
-        operation: this.book.rented ? 'return' : 'rent'
+        operation: this.book.rented ? 'return' : 'rent',
+        book_id: this.book.id
       })
   
       this.bookService.toggleRentBook(this.book.id)

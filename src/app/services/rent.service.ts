@@ -11,6 +11,7 @@ export interface RentData {
   modified_by: string
   operation: 'rent' | 'return'
   rate: number | null
+  book_id: string
 }
 
 @Injectable({

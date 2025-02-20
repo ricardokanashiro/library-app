@@ -4,4 +4,5 @@ export interface Rent {
     modified_by: string
     rate: number | null
     operation: 'rent' | 'return'
+    book_id: string
 }
