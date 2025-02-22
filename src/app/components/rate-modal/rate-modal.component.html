@@ -8,8 +8,8 @@
   <h2>Avaliação do Cliente</h2>
 
   <div class="star-rating-area">
-    <app-rate-card 
-      *ngFor="let ratingNum of ratingNums" 
+    <app-rate-card
+      *ngFor="let ratingNum of ratingNums"
       [ratingValue]="ratingNum"
       (chooseValue)="onReceiveRatingValue($event)"
       [choseRating]="choseRating">

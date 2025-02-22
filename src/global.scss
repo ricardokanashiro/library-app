@@ -34,34 +34,29 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+// @import "@ionic/angular/css/palettes/dark.system.css";
 
 @import "./theme/variables.scss";
 
 * {
-    padding: 0;
-    margin: 0;
-    border: none;
-    box-sizing: border-box;
-    font-family: $mainFont;
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  font-family: $mainFont;
 }
 
 html {
-    font-size: 62.5%;
-}
-
-body {
-    --ion-background-color: #ffffff;
-    --ion-text-color: #000000;
+  font-size: 62.5%;
 }
 
 .container {
-    padding-top: calc(env(safe-area-inset-top) + 2.5rem) !important;
+  padding-top: calc(env(safe-area-inset-top) + 2.5rem) !important;
 }
 
 ion-modal.rate-modal {
-    --height: auto;
-    display: flex;
-    align-items: flex-end;
-    background: rgba(0, 0, 0, 0.5);
+  --height: auto;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.5);
 }

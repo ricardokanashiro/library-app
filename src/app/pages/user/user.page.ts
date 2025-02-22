@@ -15,13 +15,17 @@ export class UserPage implements OnInit {
   public userData: User | undefined
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private storageService: StorageService
   ) { }
 
-  ngOnInit() {
-    this.getUser()
+  async ngOnInit() {
+    await this.getUser()
+  }
+
+  async ionViewWillEnter() {
+    await this.getUser()
   }
 
   onLogout() {

@@ -8,6 +8,8 @@
     display: flex;
     justify-content: space-between;
     gap: 1.5rem;
+
+    overflow: auto;
 }
 
 .rate-btn {

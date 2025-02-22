@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
   ]
 
   private mockedBooks: Book[] = [
-    
+
     {
       id: 'b1',
       title: 'O mágico de Oz',
@@ -114,15 +114,11 @@ export class HomePage implements OnInit {
       })
     )
 
-    this.getUser()
+    await this.getUser()
   }
 
   async ionViewWillEnter() {
     await this.getUser()
-  }
-
-  public onSelectSearchOption(event: any) {
-    console.log("Valor do select: " + event.detail.value)
   }
 
   public onCreateBook() {

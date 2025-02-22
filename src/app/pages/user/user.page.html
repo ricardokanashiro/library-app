@@ -1,13 +1,15 @@
-<div class="container" (click)="onLogout()">
+<ion-content [fullscreen]="true">
+  <div class="container" (click)="onLogout()">
 
-  <div class="user-info">
-    <h1>{{ userData?.name }}</h1>
-    <ion-text>{{ userData?.email }}</ion-text>
+    <div class="user-info">
+      <h1>{{ userData?.name }}</h1>
+      <ion-text>{{ userData?.email }}</ion-text>
+    </div>
+
+    <ion-button class="logout-btn">
+      <ion-icon name="exit"></ion-icon>
+      <ion-text>Logout</ion-text>
+    </ion-button>
+
   </div>
-
-  <ion-button class="logout-btn">
-    <ion-icon name="exit"></ion-icon>
-    <ion-text>Logout</ion-text>
-  </ion-button>
-
-</div>
+</ion-content>

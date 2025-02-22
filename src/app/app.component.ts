@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Keyboard, KeyboardResizeOptions } from '@capacitor/keyboard';
 import { StorageService } from './services/storage.service';
 
 @Component({
@@ -10,17 +9,7 @@ import { StorageService } from './services/storage.service';
 })
 export class AppComponent {
 
-  constructor(private storageService: StorageService) {
-
-    localStorage.removeItem('theme')
-
-    document.body.classList.remove('dark')
-    document.body.classList.add('light')
-  }
-
-  setupKeyboardBehavior() {
-    Keyboard.setResizeMode({ mode: 'body' } as KeyboardResizeOptions)
-  }
+  constructor(private storageService: StorageService) {}
 
   async ngOnInit() {
     await this.storageService.clear()

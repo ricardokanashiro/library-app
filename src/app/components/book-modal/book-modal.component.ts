@@ -25,7 +25,7 @@ export class BookModalComponent  implements OnInit {
   private user: User | undefined
 
   constructor(
-    private modalCtrl: ModalController, 
+    private modalCtrl: ModalController,
     private bookService: BooksService,
     private rentService: RentService,
     private storageService: StorageService
@@ -46,10 +46,6 @@ export class BookModalComponent  implements OnInit {
     if(userData) {
       this.user = JSON.parse(userData) as User
     }
-
-    (await this.rentService.getRents()).subscribe(data => {
-      console.log(data)
-    })
 
   }
 
@@ -75,8 +71,8 @@ export class BookModalComponent  implements OnInit {
 
       if(this.book.rented) {
 
-        this.modalCtrl.create({ 
-          component: RateModalComponent, 
+        this.modalCtrl.create({
+          component: RateModalComponent,
           componentProps: { book: this.book, user: this.user },
           cssClass: 'rate-modal',
           backdropDismiss: true
@@ -92,13 +88,13 @@ export class BookModalComponent  implements OnInit {
         return
       }
 
-      this.rentService.createRent({ 
+      this.rentService.createRent({
         modified_by: this.user?.id,
         rate: null,
         operation: this.book.rented ? 'return' : 'rent',
         book_id: this.book.id
       })
-  
+
       this.bookService.toggleRentBook(this.book.id)
 
       return

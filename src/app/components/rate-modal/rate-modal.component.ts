@@ -37,7 +37,6 @@ export class RateModalComponent  implements OnInit {
 
   onReceiveRatingValue(value: number) {
     this.choseRating = value
-    console.log("Valor escolhido: " + this.choseRating)
   }
 
   onRate() {
@@ -46,7 +45,7 @@ export class RateModalComponent  implements OnInit {
       return
     }
 
-    this.rentService.createRent({ 
+    this.rentService.createRent({
       modified_by: this.user?.id,
       rate: this.choseRating,
       operation: this.book.rented ? 'return' : 'rent',
