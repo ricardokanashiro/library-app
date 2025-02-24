@@ -8,4 +8,5 @@ export interface Book {
     image_path: string,
     sinopse: string,
     rented_by: string | null
+    avg_rate: number
 }

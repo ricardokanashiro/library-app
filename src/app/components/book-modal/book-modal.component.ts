@@ -24,13 +24,15 @@ export class BookModalComponent  implements OnInit {
   book: Book | undefined
 
   private reader: string | undefined
-
   private user: User | undefined
+
+  rate_avg: number = 0
 
   constructor(
     private modalCtrl: ModalController,
     private bookService: BooksService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private rentService: RentService
   ) {}
 
   async ngOnInit() {

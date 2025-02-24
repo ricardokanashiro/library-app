@@ -9,8 +9,6 @@
       <ion-text>{{ book?.author_name }}</ion-text>
     </div>
 
-    <p>{{ book?.sinopse }}</p>
-  
     <div class="book-status-rented book-status" *ngIf="!book?.rented">
       <div class="active-circle"></div>
       <p>Disponível</p>

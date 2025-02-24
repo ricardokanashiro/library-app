@@ -13,24 +13,27 @@
 
   <ion-img [src]="book?.image_path"></ion-img>
 
-  <h1>{{ book?.title }}</h1>
+  <h1>
+    {{ book?.title }}
+    <div class="avg-rate">⭐ 3.5 / 5</div>
+  </h1>
 
   <div class="sinopse-wrapper">
     <ion-text>{{ book?.sinopse }}</ion-text>
   </div>
 
-  <p>
+  <p class="info-line">
     <span>Autor: </span>
     <ion-text>{{ book?.author_name }}</ion-text>
   </p>
 
-  <p>
+  <p class="info-line">
     <span>Último aluguel: </span>
     <ion-text *ngIf="!book?.rented_date">Nenhum</ion-text>
     <ion-text *ngIf="book?.rented_date">{{ book?.rented_date }}</ion-text>
   </p>
 
-  <p>
+  <p class="info-line">
     <span>Último a dar baixa: </span>
     <ion-text *ngIf="!book?.rented_by">Nenhum</ion-text>
     <ion-text *ngIf="book?.rented_by">{{ book?.rented_by }}</ion-text>
@@ -38,19 +41,11 @@
 
   <app-rents-list [book]="this.book"></app-rents-list>
 
-  <ion-button 
-    expand="full" 
-    class="rent-btn" 
-    *ngIf="!book?.rented"
-    (click)="onRent()">
+  <ion-button expand="full" class="rent-btn" *ngIf="!book?.rented" (click)="onRent()">
     Alugar
   </ion-button>
 
-  <ion-button 
-    expand="full" 
-    class="rent-btn" 
-    *ngIf="book?.rented"
-    (click)="onRent()">
+  <ion-button expand="full" class="rent-btn" *ngIf="book?.rented" (click)="onRent()">
     Devolver
   </ion-button>
 

@@ -17,6 +17,7 @@ export interface bookData {
   image_path: string
   sinopse: string,
   rented_by: string | null
+  avg_rate: number
 }
 
 @Injectable({
@@ -77,11 +78,11 @@ export class BooksService {
       user = JSON.parse(userData) as User
     }
 
-    const updatedBooks = books.map(book => 
-      book.id === id ? 
-        { 
-          ...book, 
-          rented: !book.rented, 
+    const updatedBooks = books.map(book =>
+      book.id === id ?
+        {
+          ...book,
+          rented: !book.rented,
           rented_date: moment().format('L'),
           rented_by: user ? user.name : null
         }
@@ -98,7 +99,20 @@ export class BooksService {
       let books: Book[] = booksData ? JSON.parse(booksData) : []
       this.booksSubject.next(books)
     })
-  
+
     return this._books$
+  }
+
+  public rateBook(id: string, rate: number) {
+
+    const updatedBooks = this.booksSubject.value.map(book =>
+      book.id === id
+      ? book.avg_rate > 0
+        ? { ...book, avg_rate: book.avg_rate + rate / 2 }
+        : { ...book, avg_rate: rate }
+      : book
+    )
+
+    this.booksSubject.next(updatedBooks)
   }
 }
