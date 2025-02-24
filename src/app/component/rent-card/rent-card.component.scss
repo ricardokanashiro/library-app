@@ -1,5 +1,13 @@
-.container {
+ion-item::part(native) {
+  --inner-padding-bottom: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --inner-padding-top: 0;
+}
+
+.wrapper {
     width: 100%;
+    padding: 1rem 0;
 }
 
 header {
@@ -8,4 +16,24 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    h4 {
+      font-size: 1.55rem;
+    }
+
+    ion-text {
+      font-size: 1.2rem;
+    }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
 }
