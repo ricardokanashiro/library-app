@@ -14,9 +14,9 @@ export class SigninPage implements OnInit {
   formulario: FormGroup | any
 
   constructor(
-    private authService: AuthService, 
-    private fb: FormBuilder, 
-    private router: Router 
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.formulario = this.fb.group({
       name: ['', Validators.required],
@@ -25,8 +25,7 @@ export class SigninPage implements OnInit {
     })
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async onSignIn() {
     await this.authService.signIn(this.formulario.value)

@@ -8,10 +8,12 @@ import * as moment from 'moment';
 import { Rent } from '../interfaces/rent';
 
 export interface RentData {
-  modified_by: string
+  modified_by_id: string
+  modified_by_name: string
   operation: 'rent' | 'return'
   rate: number | null
   book_id: string
+  reader: string
 }
 
 @Injectable({
@@ -21,7 +23,7 @@ export class RentService {
 
   private _key = 'rents'
 
-  private _rentsSubject = new BehaviorSubject<Rent[]>([]) 
+  private _rentsSubject = new BehaviorSubject<Rent[]>([])
   private _rents$ = this._rentsSubject.asObservable()
 
   constructor(private storeService: StorageService) {}

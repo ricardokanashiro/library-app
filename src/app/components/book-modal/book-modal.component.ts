@@ -8,6 +8,7 @@ import { RentService } from 'src/app/services/rent.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { RateModalComponent } from '../rate-modal/rate-modal.component';
 import { Rent } from 'src/app/interfaces/rent';
+import { RentModalComponent } from '../rent-modal/rent-modal.component';
 
 @Component({
   selector: 'app-book-modal',
@@ -22,12 +23,13 @@ export class BookModalComponent  implements OnInit {
   book$: Observable<any> | undefined
   book: Book | undefined
 
+  private reader: string | undefined
+
   private user: User | undefined
 
   constructor(
     private modalCtrl: ModalController,
     private bookService: BooksService,
-    private rentService: RentService,
     private storageService: StorageService
   ) {}
 
@@ -73,7 +75,7 @@ export class BookModalComponent  implements OnInit {
 
         this.modalCtrl.create({
           component: RateModalComponent,
-          componentProps: { book: this.book, user: this.user },
+          componentProps: { book: this.book, user: this.user, reader: this.reader },
           cssClass: 'rate-modal',
           backdropDismiss: true
         })
@@ -88,14 +90,19 @@ export class BookModalComponent  implements OnInit {
         return
       }
 
-      this.rentService.createRent({
-        modified_by: this.user?.id,
-        rate: null,
-        operation: this.book.rented ? 'return' : 'rent',
-        book_id: this.book.id
+      this.modalCtrl.create({
+        component: RentModalComponent,
+        componentProps: { book: this.book, user: this.user },
+        cssClass: 'rent-modal',
+        backdropDismiss: true
       })
-
-      this.bookService.toggleRentBook(this.book.id)
+      .then(modalEl => {
+        modalEl.present()
+        return modalEl.onDidDismiss()
+      })
+      .then(resultData => {
+        this.reader = resultData.data.reader
+      })
 
       return
     }

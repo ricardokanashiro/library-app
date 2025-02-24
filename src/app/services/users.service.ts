@@ -8,7 +8,7 @@ export interface userData {
   name: string
   email: string
   password: string
-} 
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class UsersService {
 
     const userData = await this.storageService.get(this.key)
     let users: User[] = []
-    
+
     if(userData) {
       users = JSON.parse(userData) as User[]
     }
@@ -51,7 +51,7 @@ export class UsersService {
   }
 
   public async getUserByEmail(email: string) {
-    
+
     const usersData = await this.storageService.get(this.key)
     const usersParsed = JSON.parse(usersData) as User[]
 

@@ -32,6 +32,11 @@ header {
   justify-content: space-between;
 }
 
+.info-area {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 .rating {
   display: flex;
   align-items: center;

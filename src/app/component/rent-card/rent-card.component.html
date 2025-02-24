@@ -9,9 +9,18 @@
 
     <div class="content">
 
-      <ion-text>
-        <span>Feito por: </span> Ricardo Kanashiro
-      </ion-text>
+      <div class="info-area">
+
+        <ion-text>
+          <span>Leitor: </span> {{ rent?.reader }}
+        </ion-text>
+
+        <ion-text>
+          <span>Feito por: </span> {{ rent?.modified_by_name }}
+        </ion-text>
+
+      </div>
+
 
       <div class="rating" *ngIf="rent?.rate">
         <ion-text>⭐</ion-text>

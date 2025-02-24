@@ -54,7 +54,7 @@ html {
   padding-top: calc(env(safe-area-inset-top) + 2.5rem) !important;
 }
 
-ion-modal.rate-modal {
+ion-modal.rate-modal, ion-modal.rent-modal {
   --height: auto;
   display: flex;
   align-items: flex-end;

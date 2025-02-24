@@ -86,7 +86,6 @@ export class HomePage implements OnInit {
     }
 
     if (!bookData || !previousBooks || previousBooks.length === 0) {
-      await this.storageService.set('loginData', JSON.stringify(this.mockedUser))
       await this.storageService.set('authors', JSON.stringify(this.mockedAuthors))
       await this.storageService.set('books', JSON.stringify(this.mockedBooks))
     }

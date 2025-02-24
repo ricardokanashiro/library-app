@@ -1,0 +1,15 @@
+<div class="container">
+
+  <h2>Alugar Livro</h2>
+
+  <ion-input
+    type="text"
+    label="Nome do leitor"
+    labelPlacement="floating"
+    [(ngModel)]="readerName"
+    fill="outline">
+  </ion-input>
+
+  <ion-button expand="full" (click)="onRent()">Alugar</ion-button>
+
+</div>

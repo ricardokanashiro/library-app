@@ -12,11 +12,12 @@ import { RateModalComponent } from "./rate-modal/rate-modal.component";
 import { RentCardComponent } from "../component/rent-card/rent-card.component";
 import { RentsListComponent } from "./rents-list/rents-list.component";
 import { RateCardComponent } from "./rate-card/rate-card.component";
+import { RentModalComponent } from "./rent-modal/rent-modal.component";
 
 @NgModule({
     declarations: [
-        BookListComponent, 
-        BookCardComponent, 
+        BookListComponent,
+        BookCardComponent,
         CreateBookModalComponent,
         BookModalComponent,
         AuthorModalComponent,
@@ -24,17 +25,18 @@ import { RateCardComponent } from "./rate-card/rate-card.component";
         RateModalComponent,
         RentCardComponent,
         RentsListComponent,
-        RateCardComponent
+        RateCardComponent,
+        RentModalComponent
     ],
     imports: [
-        CommonModule, 
-        IonicModule, 
+        CommonModule,
+        IonicModule,
         FormsModule,
         ReactiveFormsModule
     ],
     exports: [
-        BookListComponent, 
-        BookCardComponent, 
+        BookListComponent,
+        BookCardComponent,
         CreateBookModalComponent,
         BookModalComponent,
         AuthorModalComponent,
@@ -42,7 +44,8 @@ import { RateCardComponent } from "./rate-card/rate-card.component";
         RateModalComponent,
         RentCardComponent,
         RentsListComponent,
-        RateCardComponent
+        RateCardComponent,
+        RentModalComponent
     ]
 })
 export class ComponentsModule {}

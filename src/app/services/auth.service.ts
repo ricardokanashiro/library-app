@@ -11,7 +11,7 @@ export class AuthService {
   private _isLogged: boolean = false
 
   constructor(
-    private usersService: UsersService, 
+    private usersService: UsersService,
     private alertCtrl: AlertController,
     private storageService: StorageService
   ) {}
@@ -24,12 +24,11 @@ export class AuthService {
 
     try {
       const addedUser = await this.usersService.createUser(data)
-      this.setLoginStatus(true)
-
       await this.storageService.set('loginData', JSON.stringify(addedUser))
-    } 
+      this.setLoginStatus(true)
+    }
     catch (err: any) {
-      
+
       this.alertCtrl.create({
         header: "Erro ao cadastrar conta",
         message: err.message,
@@ -39,7 +38,7 @@ export class AuthService {
       })
       .then(alertEl => {
         alertEl.present()
-      })  
+      })
     }
   }
 
@@ -50,7 +49,7 @@ export class AuthService {
     if(
       !foundUser || foundUser?.password !== data.password
     ) {
-      
+
       this.alertCtrl.create({
         header: "Erro ao logar essa conta!",
         message: "Esse usuário não existe",
@@ -64,9 +63,9 @@ export class AuthService {
 
       return
     }
-    
-    this.setLoginStatus(true)
+
     await this.storageService.set('loginData', JSON.stringify(foundUser))
+    this.setLoginStatus(true)
   }
 
   public logout() {

@@ -19,6 +19,7 @@ export class RateModalComponent  implements OnInit {
 
   @Input() book: Book | any
   @Input() user: User | any
+  @Input() reader: string | any
 
   ratingNums = ratingNums
   choseRating: number | undefined
@@ -31,10 +32,6 @@ export class RateModalComponent  implements OnInit {
 
   ngOnInit() {}
 
-  onCancel() {
-    this.modalCtrl.dismiss(null, 'cancel')
-  }
-
   onReceiveRatingValue(value: number) {
     this.choseRating = value
   }
@@ -46,10 +43,12 @@ export class RateModalComponent  implements OnInit {
     }
 
     this.rentService.createRent({
-      modified_by: this.user?.id,
+      modified_by_id: this.user?.id,
+      modified_by_name: this.user?.name,
       rate: this.choseRating,
-      operation: this.book.rented ? 'return' : 'rent',
-      book_id: this.book.id
+      operation: 'return',
+      book_id: this.book.id,
+      reader: this.reader
     })
 
     this.booksService.toggleRentBook(this.book.id)
