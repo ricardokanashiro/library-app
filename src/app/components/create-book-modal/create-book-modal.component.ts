@@ -20,7 +20,7 @@ export class CreateBookModalComponent  implements OnInit {
   selectedAuthor: Author | null = null
 
   constructor(
-    private modalCtrl: ModalController, 
+    private modalCtrl: ModalController,
     private fb: FormBuilder,
     private booksService: BooksService,
     private authorsService: AuthorsService,
@@ -57,7 +57,7 @@ export class CreateBookModalComponent  implements OnInit {
   public async onCreateBook() {
 
     if(!this.selectedImage || this.formulario.invalid || !this.selectedAuthor) {
-      
+
       this.alertCtrl.create({
         header: "Erro ao cadastrar livro!",
         message: "Existem campos inválidos no formulário",
@@ -77,7 +77,8 @@ export class CreateBookModalComponent  implements OnInit {
       rented: false,
       rented_date: null,
       image_path: this.selectedImage,
-      rented_by: null
+      rented_by: null,
+      avg_rate: 0
     })
 
     this.modalCtrl.dismiss(null, 'book created')
@@ -86,7 +87,7 @@ export class CreateBookModalComponent  implements OnInit {
   public onSelectAuthor() {
 
     this.modalCtrl.create({ component: AuthorModalComponent, componentProps: {} })
-      .then(modalEl => { 
+      .then(modalEl => {
         modalEl.present()
         return modalEl.onDidDismiss()
       })

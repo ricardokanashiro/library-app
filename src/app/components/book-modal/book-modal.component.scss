@@ -17,6 +17,44 @@ ion-img {
     margin-top: 2rem;
 }
 
+.title-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  margin: 2.5rem 0 1rem 0;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.avg-rate {
+  display: inline-flex;
+  vertical-align: middle;
+  background-color: rgb(235, 235, 235);
+
+  margin-left: 1rem;
+  padding: .6rem;
+  border-radius: .6rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.info-line {
+
+  font-size: 1.05rem;
+
+   span {
+    font-weight: bold;
+   }
+}
+
+.info-line + .info-line {
+  margin-top: .4rem;
+}
+
 .delete-btn {
     display: flex;
     align-items: center;

@@ -5,12 +5,16 @@
   <div class="book-content">
 
     <div class="book-info">
-      <h3>{{ book?.title }}</h3>
+
+      <h3>
+        {{ book?.title }} 
+        <div class="avg-rate">⭐ {{ book?.avg_rate }} / 5</div>
+      </h3>
+
       <ion-text>{{ book?.author_name }}</ion-text>
+      
     </div>
 
-    <p>{{ book?.sinopse }}</p>
-  
     <div class="book-status-rented book-status" *ngIf="!book?.rented">
       <div class="active-circle"></div>
       <p>Disponível</p>

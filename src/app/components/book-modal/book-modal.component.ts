@@ -24,8 +24,9 @@ export class BookModalComponent  implements OnInit {
   book: Book | undefined
 
   private reader: string | undefined
-
   private user: User | undefined
+
+  rate_avg: number = 0
 
   constructor(
     private modalCtrl: ModalController,

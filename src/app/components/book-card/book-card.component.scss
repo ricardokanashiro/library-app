@@ -17,6 +17,19 @@ ion-img {
         font-size: 1.4rem;
         font-weight: 600;
         margin: 0;
+        word-break: break-all;
+
+        .avg-rate {
+            display: inline-flex;
+            vertical-align: middle;
+            background-color: rgb(235, 235, 235);
+          
+            margin-left: .4rem;
+            padding: .4rem;
+            border-radius: .4rem;
+            font-size: .8rem;
+            font-weight: 600;
+          }
     }
 }
 
