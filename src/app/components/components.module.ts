@@ -13,6 +13,7 @@ import { RentCardComponent } from "../component/rent-card/rent-card.component";
 import { RentsListComponent } from "./rents-list/rents-list.component";
 import { RateCardComponent } from "./rate-card/rate-card.component";
 import { RentModalComponent } from "./rent-modal/rent-modal.component";
+import { AllRentsModalComponent } from "./all-rents-modal/all-rents-modal.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { RentModalComponent } from "./rent-modal/rent-modal.component";
         RentCardComponent,
         RentsListComponent,
         RateCardComponent,
-        RentModalComponent
+        RentModalComponent,
+        AllRentsModalComponent
     ],
     imports: [
         CommonModule,
@@ -45,7 +47,8 @@ import { RentModalComponent } from "./rent-modal/rent-modal.component";
         RentCardComponent,
         RentsListComponent,
         RateCardComponent,
-        RentModalComponent
+        RentModalComponent,
+        AllRentsModalComponent
     ]
 })
 export class ComponentsModule {}

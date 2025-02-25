@@ -4,6 +4,8 @@ import { map, Observable } from 'rxjs';
 import { Rent } from 'src/app/interfaces/rent';
 import { Book } from 'src/app/interfaces/book';
 import { StorageService } from 'src/app/services/storage.service';
+import { ModalController } from '@ionic/angular';
+import { AllRentsModalComponent } from '../all-rents-modal/all-rents-modal.component';
 
 @Component({
   selector: 'app-rents-list',
@@ -18,7 +20,8 @@ export class RentsListComponent  implements OnInit {
   loginData: any
 
   constructor(
-    private rentService: RentService
+    private rentService: RentService,
+    private modalCtrl: ModalController
   ) {}
 
   async ngOnInit() {
@@ -29,6 +32,21 @@ export class RentsListComponent  implements OnInit {
         .slice(0, 4)
       )
     )
+  }
+
+  onSeeAllList() {
+
+    this.modalCtrl.create({
+      component: AllRentsModalComponent,
+      componentProps: { book: this.book }
+    })
+    .then(modalEl => {
+      modalEl.present()
+      return modalEl.onDidDismiss()
+    })
+    .then(resultData => {
+      console.log(resultData)
+    })
   }
 
 }

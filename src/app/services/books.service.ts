@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../interfaces/book';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 import { v4 as uuidV4 } from 'uuid';
 import * as moment from 'moment';
 
 import { StorageService } from './storage.service';
 import { User } from '../interfaces/user';
+import { RentService } from './rent.service';
 
 export interface bookData {
   title: string
@@ -30,7 +31,10 @@ export class BooksService {
   private booksSubject = new BehaviorSubject<Book[]>([])
   private _books$ = this.booksSubject.asObservable()
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private rentService: RentService
+  ) {}
 
   public async createBook(data: bookData) {
 
@@ -57,6 +61,8 @@ export class BooksService {
     }
 
     const updatedBooks = [...books.filter(book => book.id !== id)]
+
+    await this.rentService.deleteRentByBookId(id)
 
     this.storageService.set(this.key, JSON.stringify(updatedBooks))
     this.booksSubject.next(updatedBooks)
@@ -103,16 +109,28 @@ export class BooksService {
     return this._books$
   }
 
-  public rateBook(id: string, rate: number) {
+  public async rateBook(id: string, rate: number) {
+
+    let rateSum = 0
+
+    const rents = (await firstValueFrom(await this.rentService.getRents()))
+      .filter(rent =>
+        rent.book_id === id && rent.operation === 'return'
+      )
+
+    rents.forEach(rent => {
+      if(rent.rate) {
+        rateSum += rent.rate
+      }
+    })
 
     const updatedBooks = this.booksSubject.value.map(book =>
       book.id === id
-      ? book.avg_rate > 0
-        ? { ...book, avg_rate: book.avg_rate + rate / 2 }
-        : { ...book, avg_rate: rate }
+      ? { ...book, avg_rate: rateSum / rents.length }
       : book
     )
-
-    this.booksSubject.next(updatedBooks)
+    
+    await this.storageService.set(this.key,  JSON.stringify([...updatedBooks]))
+    this.booksSubject.next([...updatedBooks])
   }
 }

@@ -71,4 +71,19 @@ export class RentService {
     await this.storeService.set(this._key, JSON.stringify(updatedRents))
     this._rentsSubject.next(updatedRents)
   }
+
+  public async deleteRentByBookId(id: string) {
+
+    const rentsData = await this.storeService.get(this._key)
+    let rents: Rent[] = []
+
+    if(rentsData) {
+      rents = JSON.parse(rentsData)
+    }
+
+    const updatedRents = rents.filter(rent => rent.book_id !== id)
+
+    await this.storeService.set(this._key, JSON.stringify(updatedRents))
+    this._rentsSubject.next(updatedRents)
+  }
 }

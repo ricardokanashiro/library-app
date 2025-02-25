@@ -10,6 +10,6 @@
     fill="outline">
   </ion-input>
 
-  <ion-button expand="full" (click)="onRent()">Alugar</ion-button>
+  <ion-button expand="full" (click)="onRent()" [disabled]="readerName">Alugar</ion-button>
 
 </div>

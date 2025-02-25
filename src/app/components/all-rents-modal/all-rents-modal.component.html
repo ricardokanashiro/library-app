@@ -1,0 +1,15 @@
+<div class="container">
+
+  <ion-button (click)="onCancel()">Back</ion-button>
+
+  <header>
+
+    <h1>Lista de Aluguéis</h1>
+
+    <ion-list>
+      <app-rent-card *ngFor="let rent of rents$ | async" [rent]="rent"></app-rent-card>
+    </ion-list>
+
+  </header>
+
+</div>

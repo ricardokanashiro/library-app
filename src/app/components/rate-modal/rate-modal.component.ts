@@ -36,7 +36,7 @@ export class RateModalComponent  implements OnInit {
     this.choseRating = value
   }
 
-  onRate() {
+  async onRate() {
 
     if(!this.choseRating) {
       return
@@ -51,7 +51,8 @@ export class RateModalComponent  implements OnInit {
       reader: this.reader
     })
 
-    this.booksService.toggleRentBook(this.book.id)
+    await this.booksService.toggleRentBook(this.book.id)
+    await this.booksService.rateBook(this.book.id, this.choseRating)
     this.modalCtrl.dismiss(null, 'create rent')
   }
 

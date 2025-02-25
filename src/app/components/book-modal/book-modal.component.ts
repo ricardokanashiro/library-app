@@ -4,10 +4,8 @@ import { map, Observable } from 'rxjs';
 import { Book } from 'src/app/interfaces/book';
 import { User } from 'src/app/interfaces/user';
 import { BooksService } from 'src/app/services/books.service';
-import { RentService } from 'src/app/services/rent.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { RateModalComponent } from '../rate-modal/rate-modal.component';
-import { Rent } from 'src/app/interfaces/rent';
 import { RentModalComponent } from '../rent-modal/rent-modal.component';
 
 @Component({
@@ -31,8 +29,7 @@ export class BookModalComponent  implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private bookService: BooksService,
-    private storageService: StorageService,
-    private rentService: RentService
+    private storageService: StorageService
   ) {}
 
   async ngOnInit() {
