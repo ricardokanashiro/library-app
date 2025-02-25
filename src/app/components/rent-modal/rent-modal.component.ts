@@ -24,11 +24,15 @@ export class RentModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private booksService: BooksService,
     private rentService: RentService
-  ) { }
+  ) {}
 
   ngOnInit() {}
 
   onRent() {
+
+    if(!this.readerName) {
+      return
+    }
 
     this.rentService.createRent({
       modified_by_id: this.user?.id,

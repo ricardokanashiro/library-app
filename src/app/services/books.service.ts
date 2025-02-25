@@ -126,7 +126,7 @@ export class BooksService {
 
     const updatedBooks = this.booksSubject.value.map(book =>
       book.id === id
-      ? { ...book, avg_rate: rateSum / rents.length }
+      ? { ...book, avg_rate: parseFloat((rateSum / rents.length).toFixed(2)) }
       : book
     )
     
