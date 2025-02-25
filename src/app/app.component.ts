@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(private storageService: StorageService) {}
 
   async ngOnInit() {
-    await this.storageService.clear()
+    // await this.storageService.clear()
   }
 }
